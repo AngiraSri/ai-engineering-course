@@ -1,29 +1,77 @@
 # AI Engineering Course
 
-Following the "Free AI Engineer Course" (8 weeks) by Pratyush Narain, implemented lecture by lecture.
+A personal, structured bootcamp working through the **Free AI Engineer Course (8 weeks)** by Pratyush Narain — one lecture at a time, building everything by hand.
 
-## Deviations from the course
+This repository is designed to be a **long-term learning resource**, not a dump of copied code. Every episode leaves behind working code, notes explaining *why*, and an honest record of what was hard.
 
-- **LLM provider:** OpenAI (`OPENAI_API_KEY`) instead of Groq.
-- **Vector DB:** Qdrant skipped for now; will revisit with Azure when we reach the RAG lectures.
+**Background:** written by a C#/.NET engineer learning Python. Python concepts throughout are explained against their .NET equivalents.
 
-## Project setup
+---
 
-This is a single [uv](https://docs.astral.sh/uv/) Python project covering all weeks.
+## Start here
+
+| File | What it's for |
+|---|---|
+| **[LEARNING_GUIDE.md](LEARNING_GUIDE.md)** | How we work — the teaching contract and the per-episode workflow. **Read this first.** |
+| **[COURSE_PROGRESS.md](COURSE_PROGRESS.md)** | Where I am: episodes done, in progress, upcoming, and confidence per episode |
+| **[LEARNING_JOURNAL.md](LEARNING_JOURNAL.md)** | Personal reflections and the rolling list of things to revisit |
+| **[GLOSSARY.md](GLOSSARY.md)** | Every term, each with a C#/.NET analogy |
+| **[CHEATSHEET.md](CHEATSHEET.md)** | Every command actually used, with its `dotnet` equivalent |
+| **[RESOURCES.md](RESOURCES.md)** | External links, consoles, documentation |
+
+---
+
+## Layout
+
+```
+├── Week1/ … Week8/
+│   └── episode-NN-short-title/
+│       ├── notes.md          # what we learned and built
+│       ├── source-notes.md   # the raw lecture notes, preserved unmodified
+│       └── code/             # practice scripts for this episode only
+├── projects/                 # applications spanning multiple episodes
+├── templates/                # the episode notes template
+└── [pyproject.toml, uv.lock, .python-version, main.py]
+```
+
+**Why `notes.md` and `source-notes.md` are separate:** `source-notes.md` is what the *course* said; `notes.md` is what *I* actually did, including deviations, mistakes, and gotchas. Months from now, that distinction is the whole value.
+
+**Why `code/` and `projects/` are separate:** `code/` holds disposable single-concept scripts; `projects/` holds real applications with their own lifecycle. See [projects/README.md](projects/README.md).
+
+---
+
+## Setup
+
+Single [uv](https://docs.astral.sh/uv/) project at the root — one virtual environment shared across all weeks.
 
 ```bash
 uv sync          # install dependencies into .venv
-uv run main.py   # run the entry-point script
+uv run main.py   # run a script inside the project's venv
 ```
 
-Python version is pinned in `.python-version`. Dependencies are declared in `pyproject.toml` and locked in `uv.lock` (commit both, never commit `.venv/` or `.env`).
+Copy `.env.example` to `.env` and fill in real values. **`.env` is git-ignored and must stay that way.**
 
-## Structure
+---
 
-```
-Week1/   # Episode notes + code for week 1
-```
+## Deviations from the course
 
-## Weekly notes
+| Course uses | We use | Why |
+|---|---|---|
+| Groq Cloud (LLM inference) | **OpenAI** | Existing access |
+| Qdrant Cloud (vector DB) | **Azure**, deferred | Introduced when the RAG lectures need it |
 
-- [Week 1](Week1/README.md)
+---
+
+## Progress
+
+Week 1 in progress — see [COURSE_PROGRESS.md](COURSE_PROGRESS.md) for detail.
+
+| Week | Theme |
+|---|---|
+| 1–2 | Setup & LLM fundamentals |
+| 3 | RAG & document Q&A |
+| 4 | AI agents |
+| 5 | LangGraph |
+| 6 | MCP servers |
+| 7 | Observability & evaluation |
+| 8 | Deployment, fine-tuning & capstone |
