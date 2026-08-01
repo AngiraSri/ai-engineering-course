@@ -36,6 +36,31 @@ def greet(name):        # colon, then indented body
     return f"Hi {name}"
 ```
 
+### Importing a module *executes* it **[hit — Ep 01 assessment Q3]**
+
+There is no separate declaration phase in Python. Importing a file runs it top to bottom; `def` and `class` are statements that *execute* to bring the function or class into existence.
+
+```python
+# greeter.py
+def main():
+    print("Hello!")
+
+main()          # bare call at top level
+```
+
+```python
+import greeter  # prints "Hello!" — merely importing ran it
+```
+
+Guard anything that should only run when the file is the entry point:
+
+```python
+if __name__ == "__main__":
+    main()
+```
+
+**Why it catches a C# developer:** C# has exactly one `Main`, and referencing an assembly executes nothing. In Python every file is both runnable and importable, and its top level is live code. Any top-level statement — a print, an API call, a database connection — fires on import.
+
 ### `snake_case`, not `PascalCase`
 
 Python convention ([PEP 8](https://peps.python.org/pep-0008/)): functions and variables are `snake_case`, classes are `PascalCase`, constants are `UPPER_SNAKE`. Writing `GetUserName()` in Python looks as wrong to a Python developer as `get_user_name()` looks in C#.

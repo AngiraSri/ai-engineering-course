@@ -6,7 +6,8 @@
 | **Date completed** | 2026-08-01 |
 | **Source notes** | [source-notes.md](source-notes.md) |
 | **Code** | none — setup only |
-| **Confidence** | _to be filled in_ |
+| **Assessment** | [assessment.md](assessment.md) — Tier 0 |
+| **Confidence** | 4 (mechanical) / 3 (conceptual) |
 
 ---
 

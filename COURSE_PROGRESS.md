@@ -15,8 +15,8 @@ Confidence is rated *after* the coding challenge, never before — see [LEARNING
 
 | | |
 |---|---|
-| **Episodes completed** | 0 |
-| **Current episode** | Episode 01 — awaiting assessment + journal |
+| **Episodes completed** | 1 |
+| **Current episode** | Episode 02 — awaiting lecture notes |
 | **Course length** | 8 weeks, ~40–45 episodes |
 | **Started** | 2026-08-01 |
 
@@ -26,8 +26,10 @@ Confidence is rated *after* the coding challenge, never before — see [LEARNING
 
 | Ep | Title | Status | Tier | Confidence | Notes | Assessment |
 |---|---|---|---|---|---|---|
-| 01 | Course Intro + Tech Stack Setup | 🔄 | 0 | — | [notes](Week1/episode-01-intro-setup/notes.md) | [assessment](Week1/episode-01-intro-setup/assessment.md) |
+| 01 | Course Intro + Tech Stack Setup | ✅ | 0 | 4 † | [notes](Week1/episode-01-intro-setup/notes.md) | [assessment](Week1/episode-01-intro-setup/assessment.md) |
 | 02 | *(not yet provided)* | ⬜ | — | — | | |
+
+† Self-rated 4, with a documented split: **4 mechanical / 3 conceptual**. The conceptual items are on the [revisit list](LEARNING_JOURNAL.md#revisit-list) and will be re-checked in the Week 1 review.
 
 **Week 1 review:** ⬜ not started — run before Week 2 begins.
 
