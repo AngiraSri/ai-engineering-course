@@ -1,33 +1,18 @@
-# Week 1
+# Week 1 — Foundations & Setup
 
-## Episode 01 — Course Intro + Tech Stack Setup
+## Episodes
 
-Source notes: `ai-engineer-episode-01-notes.md` (course intro, no code).
+| Ep | Title | Status | Notes |
+|---|---|---|---|
+| 01 | Course Intro + Tech Stack Setup | ✅ Complete | [notes](episode-01-intro-setup/notes.md) |
 
-### What this episode covered
-Environment setup only — no application code. Confirmed installed:
-- Python 3.14.2
-- uv 0.11.29 (package/dependency manager, replaces pip + venv management)
-- Git 2.52.0
+## Theme
 
-### Deviations
-- Using **OpenAI** instead of Groq for LLM calls.
-- Skipping **Qdrant**; vector DB will be Azure-based, added later.
+Getting the development environment working and understanding the shape of the course.
+No AI code yet — Episode 01 is entirely tooling: Python, `uv`, Git, and API credentials.
 
-### What we set up
-- Initialized this repo (`git init`), personal identity scoped to this repo only via local `git config user.email`/`user.name` (separate from the global work identity).
-- Created a single `uv` project at the workspace root (`uv init`) — one `pyproject.toml`/`.venv` shared across all weeks.
-- `.gitignore` excludes `.env` (secrets) and `.venv/` (regenerable), but keeps `uv.lock` (like a NuGet lockfile — pins exact dependency versions for reproducibility).
+## Key takeaways so far
 
-### Concepts learned (Python vs C#)
-- **Virtual environment (venv):** an isolated Python install + package set per project. Needed because, unlike NuGet, Python packages install globally by default and can clash across projects.
-- **`pyproject.toml`:** project manifest, similar role to a `.csproj`.
-- **Indentation is syntax:** Python has no `{ }` for blocks — indentation defines scope.
-- **`if __name__ == "__main__":`:** guards code so it only runs when the file is executed directly, not when imported as a module elsewhere. No direct C# equivalent.
-
-### Verified
-- [x] `python --version`
-- [x] `uv --version`
-- [x] `git --version`
-- [x] `.env` contains `OPENAI_API_KEY` (unquoted)
-- [x] `uv run main.py` → prints `Hello from ai-engineering-course!`
+- The Python toolchain (`uv`, venv, `pyproject.toml`) maps closely onto the .NET toolchain, with the venv being the one genuinely new idea.
+- Secrets live in `.env`, which is git-ignored from the very first commit — not retrofitted later.
+- We use **OpenAI** rather than the course's Groq, and defer the vector database to Azure.
