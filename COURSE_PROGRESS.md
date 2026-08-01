@@ -3,8 +3,11 @@
 Single source of truth for where I am in the course.
 Updated at the end of every episode (step 10 of the [workflow](LEARNING_GUIDE.md#4-the-per-episode-workflow)).
 
-**Status legend:** ✅ Complete · 🔄 In progress · ⬜ Not started
+**Status legend:** ✅ Complete · ✅* Complete with deferred follow-ups · 🔄 In progress · ⬜ Not started
 **Confidence:** 1 = lost · 2 = shaky · 3 = could follow along · 4 = solid · 5 = could rebuild from scratch
+**Assessment tier:** 0 = concept check only · 1 = + coding challenge · 2 = + debugging challenge
+
+Confidence is rated *after* the coding challenge, never before — see [LEARNING_GUIDE.md §5](LEARNING_GUIDE.md#5-the-episode-assessment).
 
 ---
 
@@ -12,8 +15,8 @@ Updated at the end of every episode (step 10 of the [workflow](LEARNING_GUIDE.md
 
 | | |
 |---|---|
-| **Episodes completed** | 1 |
-| **Current episode** | Episode 02 — not yet started |
+| **Episodes completed** | 0 |
+| **Current episode** | Episode 01 — awaiting assessment + journal |
 | **Course length** | 8 weeks, ~40–45 episodes |
 | **Started** | 2026-08-01 |
 
@@ -21,10 +24,12 @@ Updated at the end of every episode (step 10 of the [workflow](LEARNING_GUIDE.md
 
 ## Week 1 — Foundations & Setup
 
-| Ep | Title | Status | Confidence | Notes |
-|---|---|---|---|---|
-| 01 | Course Intro + Tech Stack Setup | ✅ | — | [notes](Week1/episode-01-intro-setup/notes.md) |
-| 02 | *(not yet provided)* | ⬜ | — | |
+| Ep | Title | Status | Tier | Confidence | Notes | Assessment |
+|---|---|---|---|---|---|---|
+| 01 | Course Intro + Tech Stack Setup | 🔄 | 0 | — | [notes](Week1/episode-01-intro-setup/notes.md) | [assessment](Week1/episode-01-intro-setup/assessment.md) |
+| 02 | *(not yet provided)* | ⬜ | — | — | | |
+
+**Week 1 review:** ⬜ not started — run before Week 2 begins.
 
 ---
 

@@ -17,6 +17,7 @@ This repository is designed to be a **long-term learning resource**, not a dump 
 | **[LEARNING_JOURNAL.md](LEARNING_JOURNAL.md)** | Personal reflections and the rolling list of things to revisit |
 | **[GLOSSARY.md](GLOSSARY.md)** | Every term, each with a C#/.NET analogy |
 | **[CHEATSHEET.md](CHEATSHEET.md)** | Every command actually used, with its `dotnet` equivalent |
+| **[PYTHON_GOTCHAS.md](PYTHON_GOTCHAS.md)** | Traps that specifically catch C# developers — also the source of debugging challenges |
 | **[RESOURCES.md](RESOURCES.md)** | External links, consoles, documentation |
 
 ---
@@ -25,14 +26,18 @@ This repository is designed to be a **long-term learning resource**, not a dump 
 
 ```
 ├── Week1/ … Week8/
+│   ├── week-N-review.md      # end-of-week integration review
 │   └── episode-NN-short-title/
 │       ├── notes.md          # what we learned and built
 │       ├── source-notes.md   # the raw lecture notes, preserved unmodified
+│       ├── assessment.md     # concept check, exercises, reflection — my answers
 │       └── code/             # practice scripts for this episode only
 ├── projects/                 # applications spanning multiple episodes
-├── templates/                # the episode notes template
+├── templates/                # notes, assessment, and week review templates
 └── [pyproject.toml, uv.lock, .python-version, main.py]
 ```
+
+**Every episode ends with an assessment** — explain the concepts in my own words, apply them in a small exercise, and debug broken code. An episode isn't complete until it's passed. Each week closes with an integration review. See [LEARNING_GUIDE.md §5](LEARNING_GUIDE.md#5-the-episode-assessment).
 
 **Why `notes.md` and `source-notes.md` are separate:** `source-notes.md` is what the *course* said; `notes.md` is what *I* actually did, including deviations, mistakes, and gotchas. Months from now, that distinction is the whole value.
 
