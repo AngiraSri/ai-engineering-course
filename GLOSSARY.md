@@ -91,13 +91,65 @@ A secret string that authenticates your requests to a hosted service (here, Open
 
 ## AI engineering
 
-*(These were named in the Episode 01 course overview but not yet taught. Definitions here are intentionally brief and will be expanded when the relevant lectures arrive.)*
-
 ### LLM (Large Language Model)
-A model trained to predict and generate text, accessed here through a hosted API rather than run locally. *(not yet covered in depth)*
+A model trained to predict and generate text, accessed here through a hosted API rather than run locally.
 
 ### Inference
-Running an already-trained model to get an output from an input — as opposed to training the model. *(not yet covered in depth)*
+Running an already-trained model to get an output from an input — as opposed to training it. Every API call we make is one inference.
+
+---
+
+### Token
+The unit an LLM reads and writes in — roughly 4 characters, or part of a word. Text is split into tokens before the model sees it, and billing is per token.
+
+**Why it matters:** it's the unit of cost *and* the unit of limits. Two practical surprises:
+- Message structure costs tokens too. "How is Virat Kohli?" (5 words) billed 14 prompt tokens — the rest is the chat format's role markers.
+- **Output is the expensive side.** Completions typically cost ~4× input per token, and replies are usually far longer than prompts. The main lever on an LLM bill is constraining how much the model *says*.
+
+### Prompt tokens vs completion tokens
+`usage` splits every call in two: `prompt_tokens` (what you sent, including all conversation history) and `completion_tokens` (what came back). Priced differently — see above.
+
+### Knowledge cutoff
+The date after which a model has seen no training data. Everything it "knows" is frozen there.
+
+**Why it matters — and this is the trap:** a model may *volunteer* its cutoff ("as of my last update in October 2023"), or may not. Observed in Episode 02: asked Virat Kohli's age, the model recalled his birthdate correctly, computed his age against its own frozen sense of "now," and returned **34 as of now** — wrong by three years, stated with no hedge whatsoever.
+
+Anything the model **derives** from a fact inherits the staleness while sounding exactly as confident as a correct answer. Two separate gaps follow from this:
+
+| Gap | Example | Fix |
+|---|---|---|
+| **Temporal** — happened after training | "Who won last night?" | Retrieval / web search |
+| **Private** — never in training at all | "What's in our contract with Acme?" | Retrieval over your own documents |
+
+Both motivate RAG (Week 3).
+
+### Statelessness
+The API remembers nothing between calls. The server holds no session; each request is independent.
+
+**Consequence:** the messages list *is* the conversation. To continue one, you resend the whole history every time — so the application, not the provider, owns memory: what to keep, drop, summarise, and whose conversation is whose.
+
+**Cost consequence:** naive implementations grow quadratically — turn 50 pays to resend turns 1–49. Trimming and summarising history is engineering work, not polish.
+
+### Roles (`system`, `user`, `assistant`)
+Every message carries a role, which is how the model reconstructs who said what.
+
+| Role | For |
+|---|---|
+| `system` | Standing instructions that shape behaviour for the whole conversation |
+| `user` | What the human/application asks |
+| `assistant` | What the model previously replied — including history you fabricate yourself |
+
+**Caution:** `system` is strong guidance, **not a security boundary**. A user message can talk a model out of its system prompt (*prompt injection*). Never treat it as enforcement.
+
+### `choices` and the `n` parameter
+Responses arrive as a *list* of completions, not a single answer — hence `response.choices[0].message.content`. The `n` parameter controls how many independent completions to generate (default 1, billed for each). Generating several and picking the best is a real quality technique.
+
+### Client (SDK)
+The object holding credentials and connection config, through which calls are made (`client = OpenAI(api_key=...)`).
+
+**C#/.NET analogy:** an `HttpClient` wrapper or a typed service client. Constructed once, reused for many calls.
+
+**Note:** the OpenAI SDK reads `OPENAI_API_KEY` from the environment automatically, so `OpenAI()` with no arguments works once `load_dotenv()` has run.
 
 ### RAG (Retrieval-Augmented Generation)
 An architecture where relevant documents are retrieved and supplied to an LLM as context, so it can answer questions about data it was never trained on. *(not yet covered in depth — Week 3)*
