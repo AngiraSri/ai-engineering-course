@@ -39,6 +39,29 @@ The tutor (Claude) must:
 |---|---|---|
 | Groq Cloud (LLM inference) | **OpenAI** (`OPENAI_API_KEY`) | Learner preference / existing access |
 | Qdrant Cloud (vector DB) | **Azure** (deferred) | Introduced when the RAG lectures need it |
+| Chat Completions API | **Chat Completions** *(deliberately — see below)* | Still supported, and the de facto cross-provider standard |
+
+### Note on Chat Completions vs the Responses API
+
+OpenAI positions the **Responses API** (`client.responses.create`) as primary for new integrations; **Chat Completions is still supported and not deprecated**. The course teaches Chat Completions.
+
+**We stay on Chat Completions**, deliberately:
+
+1. Translating every lecture's code would spend attention on API differences rather than the concepts being taught.
+2. The Chat Completions shape is the **de facto cross-provider standard** — Groq, Mistral, vLLM, Ollama and most local servers speak it. That portability is a real engineering argument; Responses is OpenAI-only.
+3. The difference only becomes substantive at tool-calling and agents (Weeks 4–6), which is the right point to compare them properly.
+
+Key differences, for reference:
+
+| | Chat Completions | Responses |
+|---|---|---|
+| Input | `messages=[{"role","content"}]` | `input=` (string or message list) |
+| System prompt | a `system` message | `instructions=` parameter |
+| Read reply | `response.choices[0].message.content` | `response.output_text` |
+| Built-in tools | none | web search, file search, code interpreter |
+| Conversation state | none — resend history | optional server-side (`previous_response_id`) |
+
+**Conceptually important:** the statelessness taught in Ep 02 is a *design choice of Chat Completions*, not a property of LLM APIs in general. The underlying trade-off is unchanged — either the application owns conversation memory (control, portability) or the provider does (less code, more lock-in) — but it is a decision, not a constraint.
 
 ---
 
@@ -55,6 +78,14 @@ The tutor (Claude) must:
 - `code/` — only if the episode involves code
 
 **Step 3 — Plan aloud.** State what the episode covers, what will be built, which new Python concepts will appear, and the assessment tier (§5). Confirm before writing code.
+
+**Step 3a — Currency check.** Before writing code against any library or API, the tutor states whether the lecture's approach is still current, and flags it explicitly if not: what changed, whether the old way still works, and whether we follow the lecture or deviate — with the reason.
+
+Course material ages faster than the concepts it teaches. A recorded lecture is a snapshot; SDKs move underneath it. The learner should never discover a deprecation or a superseded API on their own after writing code against it.
+
+When the lecture's approach is outdated but still supported, the default is **follow the lecture and document the difference** — switching on every episode costs more attention than it buys. Deviate only when the old way is broken, insecure, or when the difference is the actual subject of the lecture.
+
+*(Added after Ep 02: the course teaches Chat Completions; OpenAI now positions the Responses API as primary for new work. The learner caught this, not the tutor. See §3.)*
 
 ### Learning and building
 

@@ -172,6 +172,17 @@ Context works — *"his"* resolved to Kohli without being told who "he" was. The
 | `uv init day_1` + `uv venv env --python 3.11` per day | **Nothing** — root project reused | One project for the whole course, decided in Ep 01 |
 | Copy `.env` into the episode folder | **Kept one `.env` at the root** | `load_dotenv()` walks *up* the tree and finds it. Copying secrets into multiple folders is how one eventually gets committed |
 | Activate venv, then `python script.py` | **`uv run script.py`** | Handles the venv automatically |
+| Chat Completions API | **Chat Completions** — kept deliberately | See below |
+
+### ⚠️ Currency note — Chat Completions vs Responses
+
+The lecture (and this code) uses **Chat Completions**. OpenAI now positions the **Responses API** as primary for new integrations; Chat Completions remains supported and is not deprecated. SDK 2.52.0 exposes both — verified locally: `client.responses`, `client.chat.completions` and `client.conversations` all exist.
+
+**We stay on Chat Completions** for portability (it's the de facto cross-provider standard — Groq, Mistral, vLLM, Ollama speak the same shape) and for course continuity. Full reasoning and the API mapping table: [LEARNING_GUIDE.md §3](../../LEARNING_GUIDE.md#3-deviations-from-the-source-course).
+
+**One concept this refines:** the statelessness above is a design choice of *Chat Completions*, not a property of LLM APIs generally — Responses can hold conversation state server-side via `previous_response_id`. The trade-off is unchanged (application owns memory = control + portability; provider owns it = less code + lock-in), but it's a decision rather than a constraint.
+
+*Process note: this was caught by the learner, not the tutor. `LEARNING_GUIDE.md` now has a **Step 3a — Currency check** requiring the tutor to flag outdated lecture material before code is written against it.*
 
 *Also noted: the lecture's own setup commands are inconsistent — it creates a venv named `env` but then activates `.venv`. Published material has bugs too.*
 

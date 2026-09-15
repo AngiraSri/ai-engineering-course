@@ -123,8 +123,23 @@ Anything the model **derives** from a fact inherits the staleness while sounding
 
 Both motivate RAG (Week 3).
 
+### Chat Completions vs Responses API
+Two OpenAI interfaces for the same underlying models. **Chat Completions** (`client.chat.completions.create`) is what this course uses; **Responses** (`client.responses.create`) is OpenAI's newer, primary-for-new-work API. Both are present in SDK 2.x and Chat Completions is not deprecated.
+
+| | Chat Completions | Responses |
+|---|---|---|
+| Input | `messages=[{"role","content"}]` | `input=` (string or list) |
+| System prompt | a `system` message | `instructions=` |
+| Read reply | `response.choices[0].message.content` | `response.output_text` |
+| Built-in tools | none | web search, file search, code interpreter |
+| State | none — resend history | optional server-side (`previous_response_id`) |
+
+**Why we stay on Chat Completions:** it is the de facto cross-provider standard (Groq, Mistral, vLLM, Ollama and others speak the same shape), so it buys portability. Responses is OpenAI-only. Full reasoning in [LEARNING_GUIDE.md §3](LEARNING_GUIDE.md#3-deviations-from-the-source-course).
+
 ### Statelessness
 The API remembers nothing between calls. The server holds no session; each request is independent.
+
+**Not a universal law.** This is a *design choice of Chat Completions*. The Responses API can keep conversation state server-side via `previous_response_id`. The trade-off is what actually matters: either the application owns memory (control over what's kept, trimmed and summarised, plus portability) or the provider does (less code, more lock-in). It is a decision, not a constraint.
 
 **Consequence:** the messages list *is* the conversation. To continue one, you resend the whole history every time — so the application, not the provider, owns memory: what to keep, drop, summarise, and whose conversation is whose.
 
